@@ -1,0 +1,65 @@
+﻿@model LoginVo
+@{
+    //Layout = null;
+    var accountMsgClass = (Model.AccountMsg == "") ? "hide" : "";
+    var pwdMsgClass = (Model.PwdMsg == "") ? "hide" : "";
+}
+
+<style>
+body {
+    font-family: "微軟正黑體",open-sans, Arial, sans-serif;
+    line-height: 170%;
+    font-size: 15px;
+    height: 100%;
+    color: #333;
+}
+.login {
+    background-color: #364150!important;
+    /* margin: 5%; */
+    width: 100%;
+    float: left;
+}
+.logo_title {
+    color: #fff;
+    padding: 3% 0;
+    text-align: center;
+}
+.login_box {
+    background: #fff;
+    padding: 3%;
+    float: left;
+    width: 100%;
+    border-radius: 10px;
+}
+</style>
+
+<div class="login">
+	<div class="logo_title">登入系統</div>
+    <div style="max-width:800px; margin:0 auto">
+        <div class="login_box">
+            <div class="col-md-6 col-sm-12 col-xs-12 login_con">
+                <div class="title_02 text-center">內部網站登入</div>
+                <div class="all_width">帳號</div>
+                <div class="all_width"><input type="text" name="account" id="account" class="form_01"></div>
+                <div class="all_width">密碼</div>
+                <div class="all_width"><input type="text" name="password" id="password" class="form_01"></div>
+                <div class="all_width">驗證碼</div>
+                <div class="all_width">
+                    <input type="text" name="number" id="number1" class="input_code" placeholder="請輸入驗證碼">
+                    <div class="code_img">
+                    	<img src="img/Pic_Check01.gif" alt="驗證碼">&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+                <div class="all_width"><a href="member_forget.html"><span class="red">忘記密碼？</span></a></div>
+                <div class="all_width"><br></div>
+                <div class="all_width text-center"><input type="button" class="btn_02" value="登入" onclick="location.href='index.html'"></div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 login_con">
+            	<div class="login_info">
+                    <div class="title_02 text-center">說明事項</div>
+                    本系統採用「單一簽入」方式登入認證，若您無單一簽入權限，請向管理人員申請登入用「帳號、密碼」，由下方進行帳號登入
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

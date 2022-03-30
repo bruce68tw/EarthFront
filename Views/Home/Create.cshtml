@@ -1,0 +1,25 @@
+﻿@model LoginVo
+@{
+    //Layout = null;    
+    var accountMsgClass = (Model.AccountMsg == "") ? "hide" : "";
+    var pwdMsgClass = (Model.PwdMsg == "") ? "hide" : "";
+}
+
+<style>
+</style>
+
+<script>
+    //window.onload be ok only !! 
+    window.onload = function() {
+        var msg = '@Model.ErrorMsg';
+        if (msg !== '')
+            alert(msg);
+        document.getElementById('Account').focus();
+    };
+</script>
+
+<form class='col-md-3 xg-form xg-border'>
+    <vc:xi-text dto="@(new(){ Title = "Account", Fid = "Account", MaxLen = 30, Required = true, Cols = "12" })"/>
+    <vc:xi-text dto="@(new(){ Title = "Name", Fid = "Name", MaxLen = 30, Required = true, Cols = "12" })"/>
+    <vc:xi-text dto="@(new(){ Title = "Email", Fid = "Email", MaxLen = 30, Required = true, Cols = "12" })"/>
+</form>

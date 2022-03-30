@@ -1,0 +1,59 @@
+﻿@model LoginVo
+@{
+    //Layout = null;
+    var accountMsgClass = (Model.AccountMsg == "") ? "hide" : "";
+    var pwdMsgClass = (Model.PwdMsg == "") ? "hide" : "";
+}
+
+<style>
+    .xu-line {
+        width: 100%;
+        height: 15px;
+        border-bottom: 1px solid lightgray;
+        text-align: center;
+        margin: 15px 0 25px 0;
+    }
+    .xu-line span {
+        font-size: 16px;
+        background-color: #ffffff;
+        padding: 0px 10px;
+    }
+
+    .btn-default {
+        border-color: lightgray !important;
+    }
+</style>
+
+<script>
+    //window.onload be ok only !! 
+    /*
+    window.onload = function() {
+        var msg = '@Model.ErrorMsg';
+        if (msg !== '')
+            alert(msg);
+        document.getElementById('Account').focus();
+    };
+    */
+</script>
+
+<form class='col-md-3 xg-form xg-border'>
+    <vc:xi-text dto="@(new(){ Title = "帳號", Fid = "Account", MaxLen = 30, Required = true, Cols = "12" })"/>
+    <vc:xi-text dto="@(new(){ Title = "密碼", Fid = "Pwd", MaxLen = 30, Required = true, Cols = "12" })"/>
+    <vc:xi-check dto="@(new(){ Fid = "Remember", Label = "Remember me" })"/>
+
+    <div style="margin-top:20px">
+        <button type="button" class="btn btn-primary">登入</button>
+        <button type="button" class="btn btn-secondary">建立帳號</button>
+        <button type="button" class="btn btn-secondary">忘記密碼</button>
+    </div>
+
+    <div class="xu-line">
+        <span>or login by</span>
+    </div>
+    <a class="btn btn-default" href="OpenGoogle">
+        <img src="/image/google.jpg" width="20" />Google
+    </a>
+    <a class="btn btn-default" href="OpenFb">
+        <img src="/image/facebook.jpg" width="20" />Facebook
+    </a>
+</form>

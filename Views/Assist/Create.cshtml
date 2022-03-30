@@ -1,0 +1,20 @@
+﻿<script src="~/js/view/Assist.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //_me.init();
+    });
+</script>
+
+@*await Component.InvokeAsync("XgProgPath", new { names = new string[] { "使用者管理" } })*@
+<div id="divEdit">
+    <form id='eform' class='xg-form'>
+	    @await Component.InvokeAsync("XiHide", new XiHideDto{ Fid = "Id" })
+	
+	    @await Component.InvokeAsync("XiText", new XiTextDto{ Title = "討論區名稱", Fid = "Name", MaxLen = 30, Required = true })
+	    @await Component.InvokeAsync("XiCheck", new XiCheckDto{ Title = "資料狀態", Fid = "Status", Label = "啟用" })
+	    @await Component.InvokeAsync("XiRead", new XiReadDto { Title = "建檔人員", Fid = "CreatorName" })
+        @await Component.InvokeAsync("XiRead", new XiReadDto { Title = "建檔日期", Fid = "Created", Format = BrFormatEstr.Dt }) 
+    </form>
+
+    @await Component.InvokeAsync("XgSaveBack")
+</div>
