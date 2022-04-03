@@ -91,8 +91,8 @@ var _crud = {
 
     dtStatusName: function (value) {
         return (value == '1')
-            ? '<div>' + _BR.StatusYes + '</div>'
-            : '<div class="text-danger">' + _BR.StatusNo + '</div>';
+            ? '<span>' + _BR.StatusYes + '</span>'
+            : '<span class="text-danger">' + _BR.StatusNo + '</span>';
     },
 
     dtYesEmpty: function (value) {

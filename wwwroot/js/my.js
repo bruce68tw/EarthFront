@@ -530,8 +530,8 @@ var _crud = {
 
     dtStatusName: function (value) {
         return (value == '1')
-            ? '<div>' + _BR.StatusYes + '</div>'
-            : '<div class="text-danger">' + _BR.StatusNo + '</div>';
+            ? '<span>' + _BR.StatusYes + '</span>'
+            : '<span class="text-danger">' + _BR.StatusNo + '</span>';
     },
 
     dtYesEmpty: function (value) {
@@ -2122,6 +2122,7 @@ var _fun = {
     //jwt token, auto added into http headers if not empty.
     //jwtToken: '',
 
+    isRwd: false,
     locale: 'zh-TW',    //now locale, _Layout.cshmlt will set
     maxFileSize: 50971520,  //upload file limit(50M)
 
@@ -4975,9 +4976,24 @@ function Datatable(selector, url, dtConfig, findJson, fnOk, tbarHtml) {
             }
             config = _json.copy(dtConfig, config);
         }
+
+        //add data-rwd-th if need
+        var dt = $(selector);
+        if (_fun.isRwd) {
+            //讀取多筆資料 header (set this._rwdTh[])
+            var me = this;
+            me._rwdTh = [];
+            dt.find('th').each(function (idx) {
+                me._rwdTh[idx] = $(this).text() + '：';
+            });
+            config.createdRow = function (row, data, dataIndex) {
+                $(row).find('td').each(function (idx) {
+                    $(this).attr('data-rwd-th', me._rwdTh[idx]);
+                });
+            };
+        }
         
         //before/after ajax call, show/hide waiting msg
-        var dt = $(selector);
         dt.on('preXhr.dt', function (e, settings, data) { _fun.block(); });
         dt.on('xhr.dt', function (e, settings, data) { _fun.unBlock(); });
         this.dt = dt.DataTable(config);

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="_log\**" />
+    <Content Remove="_log\**" />
+    <EmbeddedResource Remove="_log\**" />
+    <None Remove="_log\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Base\BaseWeb\BaseWeb.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://docs.gradle.com/build-cache-node/schema/build-cache-node-config-schema-5.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

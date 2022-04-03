@@ -3,7 +3,7 @@
 .xg-top {
     color: #EAFFFF;
     background: #28C2FE;
-    height: 45px;
+    /*height: 45px;*/
     border-bottom: 1px solid #CCC;
 }
 
@@ -22,7 +22,7 @@
     height: 100vh;
     vertical-align: top;
     transition: 0.5s;
-    border-left: 1px solid #CCC;
+    /*border-left: 1px solid #CCC;*/
 }
 
 .xg-leftmenu {

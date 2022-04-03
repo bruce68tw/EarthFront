@@ -1,8 +1,8 @@
 ﻿
 <style>
+    /*
     .xu-top {
         color: #EAFFFF;
-        /*background: #28C2FE;*/
         height: 45px;
         border-bottom: 1px solid #CCC;
     }
@@ -15,10 +15,11 @@
     .xu-top i {
         font-size: 20px;
     }
+    */
 </style>
 
 <header>
-    <nav class="xu-top navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+    <nav class="xg-top navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">幫助地球</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -34,6 +35,9 @@
                         <a class="nav-link text-dark" data-pjax href="/Act/Read">活動查詢</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-dark" data-pjax href="/Donate/Read">捐款查詢</a>
+                    </li>
+                    <li class="nav-item">
                         <!--
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#boxAttend" aria-controls="boxAttend" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -43,12 +47,12 @@
                             <ul class="navbar-nav">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="boxAttendLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                參加人員功能
+                                參加者功能
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="boxAttendLink">
-                                <li><a class="dropdown-item" href="#">參加抽獎</a></li>
-                                <li><a class="dropdown-item" href="#">活動報到</a></li>
-                                <li><a class="dropdown-item" href="#">兌換以太幣</a></li>
+                                    <li><a class="dropdown-item" href="#">活動報到</a></li>
+                                    <li><a class="dropdown-item" href="#">參加抽獎</a></li>
+                                    <li><a class="dropdown-item" href="#">兌換以太幣</a></li>
                                 </ul>
                             </li>
                             </ul>
@@ -62,9 +66,9 @@
                                 活動發起人功能
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="boxIssueLink">
-                                <li><a class="dropdown-item" href="#">活動維護</a></li>
-                                <li><a class="dropdown-item" href="#">勳章使用記錄</a></li>
-                                <li><a class="dropdown-item" href="#">抽獎</a></li>
+                                    <li><a class="dropdown-item" href="#">我的活動</a></li>
+                                    <li><a class="dropdown-item" href="#">勳章使用記錄</a></li>
+                                    <li><a class="dropdown-item" href="#">抽獎</a></li>
                                 </ul>
                             </li>
                             </ul>
@@ -78,9 +82,8 @@
                                 贊助者功能
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="boxAssistLink">
-                                <li><a class="dropdown-item" href="#">參加抽獎</a></li>
-                                <li><a class="dropdown-item" href="#">活動報到</a></li>
-                                <li><a class="dropdown-item" href="#">兌換以太幣</a></li>
+                                    <li><a class="dropdown-item" href="#">我要捐款</a></li>
+                                    <li><a class="dropdown-item" href="#">贊助活動查詢</a></li>
                                 </ul>
                             </li>
                             </ul>

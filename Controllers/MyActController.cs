@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EarthFront.Controllers
 {
-    public class ActController : ApiCtrl
+    public class MyActController : ApiCtrl
     {
         //[XgLogin]        
         public ActionResult Read()
@@ -16,11 +16,6 @@ namespace EarthFront.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<ContentResult> GetPage(DtDto dt)
-        {
-            return JsonToCnt(await new ActRead().GetPageAsync(Ctrl, dt));
-        }
 
     }//class
 }

@@ -17,7 +17,7 @@ namespace EarthFront.Services
         //constant
         //public const string MyVer = "20201228f";     //for my.js/css
         public static string MyVer = _Date.NowSecStr(); //for my.js/css
-        public const string LibVer = "20220321a";       //for lib.js/css
+        public const string LibVer = "2022032c";       //for lib.js/css
         public const string JwtToken = "_JwtToken";     //cookie name for jwt token
 
         public static string NoImagePath = _Fun.DirRoot + "/wwwroot/image/noImage.jpg";

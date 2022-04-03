@@ -112,7 +112,7 @@ namespace EarthFront.Controllers
             {
                 var token = await _FbAuth.CodeToToken(code);
                 var user = await _FbAuth.GetUser(token);
-                await _Log.InfoAsync(_Json.ToStr(user));
+                //await _Log.InfoAsync(_Json.ToStr(user));
                 var email = user["email"].ToString();
                 var jwtToken = await new HomeService().AuthLoginAsync(email);
 
