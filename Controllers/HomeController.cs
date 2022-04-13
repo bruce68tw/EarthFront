@@ -5,6 +5,7 @@ using EarthFront.Models;
 using EarthFront.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
 
 namespace EarthFront.Controllers
 {
@@ -18,7 +19,7 @@ namespace EarthFront.Controllers
         }
         public ActionResult Login(string url = "")
         {
-            return View(new LoginVo() { FromUrl = url });
+            return View(new LoginVo() { FromUrl = GetUrl(url) });
         }
 
         [HttpPost]
@@ -37,23 +38,32 @@ namespace EarthFront.Controllers
             #endregion
 
             //3.redirect
-            return ToIndex(token);
+            return LoginAndRedirect(token);
 
         lab_exit:
             return View(vo);
         }
 
-        private RedirectToActionResult ToIndex(string token)
+        private ActionResult LoginAndRedirect(string token, string url = "")
         {
             _Http.SetCookie(_Xp.JwtToken, token);
-            return RedirectToAction("Index");
+            return (url == "")
+                ? RedirectToAction("Index")
+                : Redirect("~" + GetUrl(url));
+        }
+
+        private string GetUrl(string url = "")
+        {
+            return (url == "")
+                ? "" : HttpUtility.UrlDecode(url);
         }
 
         //show google signIn form
-        public ActionResult OpenGoogle()
+        //param url from url
+        public ActionResult OpenGoogle(string url = "")
         {
             _Xp.InitGoogleAuth();
-            return Redirect(_GoogleAuth.GetAuthUrl());
+            return Redirect(_GoogleAuth.GetAuthUrl(GetUrl(url)));
         }
 
         //call after google login
@@ -78,8 +88,12 @@ namespace EarthFront.Controllers
                 var email = user["email"].ToString();
                 var jwtToken = await new HomeService().AuthLoginAsync(email);
 
+                //get state for redirect url
+                var url = (query["state"].Count == 0 || query["state"][0] == null)
+                    ? "" : query["state"][0];
+
                 //轉到首頁
-                return ToIndex(jwtToken);
+                return LoginAndRedirect(jwtToken, url);
             }
 
         //case else
@@ -117,7 +131,7 @@ namespace EarthFront.Controllers
                 var jwtToken = await new HomeService().AuthLoginAsync(email);
 
                 //轉到首頁
-                return ToIndex(jwtToken);
+                return LoginAndRedirect(jwtToken);
             }
 
         //case else
@@ -132,7 +146,7 @@ namespace EarthFront.Controllers
 
         public ActionResult Logout()
         {
-            return ToIndex("");
+            return LoginAndRedirect("");
         }
 
         public ActionResult Error()

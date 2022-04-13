@@ -28,11 +28,11 @@ var _obj = {
     },
 
     /**
-     * get object by data-id
-    getD: function (val, box) {
-        return _obj.getF('[data-id=' + val + ']', box);
-    },
+     * get object by id
      */
+    getD: function (id, box) {
+        return _obj.getF('#' + id, box);
+    },
 
     /**
      * get object by value

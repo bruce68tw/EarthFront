@@ -57,19 +57,21 @@
     <!-- Top -->
     <partial name="_Top.cshtml" />
 
-    <div class="container-fluid">
+    <div class="container">
         <main role="main" class="pb-3 xg-body">
             @RenderBody()
         </main>
     </div>
 
+    <!--
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - EarthFront - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    -->
 
     <!-- tool component -->
-    @await Component.InvokeAsync("XgTool")
+    <vc:xg-tool/>
 </body>
 </html>

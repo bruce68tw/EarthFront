@@ -77,3 +77,9 @@ table.dataTable thead .sorting_desc_disabled:after {
     font-family: 'icomoon' !important;
 	font-weight: lighter !important;
 }
+
+@media (max-width:768px) {
+    .dataTables_length, .dataTables_info {
+        display: none;
+    }
+}

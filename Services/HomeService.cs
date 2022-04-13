@@ -1,11 +1,8 @@
 ﻿using Base.Services;
 using EarthFront.Models;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace EarthFront.Services
 {
@@ -36,8 +33,8 @@ and Status=1
                 userId = _Str.NewId();
                 name = _Str.GetLeft(email, "@");
                 sql = $@"
-insert into dbo.UserFront (Id,Name,Email,Status)
-values ({userId},{name},@Email,1)
+insert into dbo.UserFront (Id, Name, Email, Status, Created)
+values ('{userId}', '{name}', @Email, 1, getdate())
 ";
                 await db.ExecSqlAsync(sql, args);
             }

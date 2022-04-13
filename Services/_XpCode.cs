@@ -10,23 +10,23 @@ namespace EarthFront.Services
     public static class _XpCode
     {
         #region master table to codes
-        public static async Task<List<IdStrDto>> GetProjectsAsync(Db db = null)
+        public static async Task<List<IdStrDto>> GetProjectsAsync(Db? db = null)
         {
             return await TableToListAsync("Project", db);
         }
-        public static async Task<List<IdStrDto>> GetUsersAsync(Db db = null)
+        public static async Task<List<IdStrDto>> GetUsersAsync(Db? db = null)
         {
             return await TableToListAsync("User", db);
         }
-        public static async Task<List<IdStrDto>> GetDeptsAsync(Db db = null)
+        public static async Task<List<IdStrDto>> GetDeptsAsync(Db? db = null)
         {
             return await TableToListAsync("Dept", db);
         }
-        public static async Task<List<IdStrDto>> GetRolesAsync(Db db = null)
+        public static async Task<List<IdStrDto>> GetRolesAsync(Db? db = null)
         {
             return await TableToListAsync("XpRole", db);
         }
-        public static async Task<List<IdStrDto>> GetProgsAsync(Db db = null)
+        public static async Task<List<IdStrDto>> GetProgsAsync(Db? db = null)
         {
             //return TableToList("XpProg", db);
             var sql = @"
@@ -36,30 +36,30 @@ from dbo.XpProg
 order by Id";
             return await SqlToListAsync(sql, db);
         }
-        public static async Task<List<IdStrDto>> GetFlowsAsync(Db db = null)
+        public static async Task<List<IdStrDto>> GetFlowsAsync(Db? db = null)
         {
             return await TableToListAsync("XpFlow", db);
         }
         #endregion
 
         #region get from XpCode table
-        public static async Task<List<IdStrDto>> GetAuthRangesAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetAuthRangesAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "AuthRange", db);
         }
-        public static async Task<List<IdStrDto>> GetLangLevelsAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetLangLevelsAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "LangLevel", db);
         }
-        public static async Task<List<IdStrDto>> GetLeaveTypesAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetLeaveTypesAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "LeaveType", db);
         }
-        public static async Task<List<IdStrDto>> GetSignStatusesAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetSignStatusesAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "SignStatus", db);
         }
-        public static async Task<List<IdStrDto>> GetSignStatuses2Async(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetSignStatuses2Async(string locale, Db? db = null)
         {
             var sql = $@"
 select 
@@ -73,19 +73,19 @@ order by Sort";
         #endregion
 
         #region for flow
-        public static async Task<List<IdStrDto>> GetNodeTypesAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetNodeTypesAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "NodeType", db);
         }
-        public static async Task<List<IdStrDto>> GetSignerTypesAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetSignerTypesAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "SignerType", db);
         }
-        public static async Task<List<IdStrDto>> GetAndOrsAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetAndOrsAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "AndOr", db);
         }
-        public static async Task<List<IdStrDto>> GetLineOpsAsync(string locale, Db db = null)
+        public static async Task<List<IdStrDto>> GetLineOpsAsync(string locale, Db? db = null)
         {
             return await TypeToListAsync(locale, "LineOp", db);
         }
@@ -119,7 +119,7 @@ order by Sort";
         }
         #endregion
 
-        private static async Task<List<IdStrDto>> TableToListAsync(string table, Db db = null)
+        private static async Task<List<IdStrDto>> TableToListAsync(string table, Db? db = null)
         {
             var sql = string.Format(@"
 select 
@@ -131,7 +131,7 @@ order by Id
         }
 
         //get codes from sql 
-        private static async Task<List<IdStrDto>> SqlToListAsync(string sql, Db db = null)
+        private static async Task<List<IdStrDto>> SqlToListAsync(string sql, Db? db = null)
         {
             var emptyDb = false;
             _Fun.CheckOpenDb(ref db, ref emptyDb);
@@ -142,7 +142,7 @@ order by Id
         }
 
         //get code table rows
-        private static async Task<List<IdStrDto>> TypeToListAsync(string locale, string type, Db db = null)
+        private static async Task<List<IdStrDto>> TypeToListAsync(string locale, string type, Db? db = null)
         {
             var sql = $@"
 select 
@@ -161,7 +161,7 @@ order by Sort";
             return _Model.GetValue<XpCode>(row, name).ToString();
         }
 
-        public static List<IdStrExtModel> GetCodeExts(string type, Db db = null)
+        public static List<IdStrExtModel> GetCodeExts(string type, Db? db = null)
         {
             var emptyDb = (db == null);
             if (emptyDb)

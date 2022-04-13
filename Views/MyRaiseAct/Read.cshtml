@@ -1,0 +1,50 @@
+﻿<script src="~/js/view/MyRaiseAct.js"></script>
+<script type="text/javascript">
+    $(function () {
+        _me.init();
+    });
+</script>
+
+@await Component.InvokeAsync("XgProgPath", new { names = new string[] { "我擧辦的活動" } })
+<div class="xg-prog">
+    <div id="divRead">
+		<form id='formRead' class='xg-form'>
+			<div class="row">
+                <vc:xi-text dto="@(new(){ Title = "活動名稱", Fid = "Name", InRow = true })"/>
+                <vc:xg-find-tbar/>
+			</div>
+        </form>
+
+		<div class='xg-btns-box'>
+            <vc:xg-create/>
+        </div>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <table id="tableRead" class="table table-bordered xg-table" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <vc:xg-th dto="@(new(){ Title = "活動名稱", MinWidth = 80 })"/>
+                            <vc:xg-th dto="@(new(){ Title = "狀態", MinWidth = 50 })"/>
+                            <vc:xg-th dto="@(new(){ Title = "建立人員", MinWidth = 60 })"/>
+                            <vc:xg-th dto="@(new(){ Title = "建立日期", MinWidth = 80, HideRwd = true })"/>
+                            <vc:xg-th dto="@(new(){ Title = "維護", MinWidth = 40 })"/>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @*
+    <div id="divEdit" class="xg-hide">
+        <partial name="Edit" />
+    </div>
+    *@
+</div>
+
+<!--
+<div style="height:400px">
+    test
+</div>
+-->

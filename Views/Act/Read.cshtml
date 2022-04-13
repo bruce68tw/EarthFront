@@ -1,47 +1,105 @@
-﻿<script src="~/js/view/Act.js"></script>
+﻿@model PageOut<ActRowDto>
+<script src="~/js/view/Act.js"></script>
 <script type="text/javascript">
     $(function () {
+        _me.pageArg = _page.getPageArg('@Model.PageArg')
         _me.init();
     });
 </script>
 
-@await Component.InvokeAsync("XgProgPath", new { names = new string[] { "活動查詢" } })
-<div class="xg-prog">
-    <div id="divRead">
-		<form id='formRead' class='xg-form'>
-			<div class="row">
-                <vc:xi-text dto="@(new(){ Title = "活動名稱", Fid = "Name", InRow = true })"/>
-                <vc:xg-find-tbar/>
-			</div>
-        </form>
+<style>
+    .xu-card {
+        display: block;
+        padding: 0;
+        margin-bottom: 20px;
+        line-height: 1.42857143;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        -webkit-transition: border .2s ease-in-out;
+        -o-transition: border .2s ease-in-out;
+        transition: border .2s ease-in-out;
+    }
+    .xu-card:hover {
+        border: 1px solid #FF7962;
+    }
+    .xu-card .image {
+        display: inline-block;
+        line-height: 215px;
+        text-align: center;
+        width: 100%;
+        padding-bottom: 64%;
+        border-top-left-radius: 4px 4px;
+        border-top-right-radius: 4px 4px;
+    }
+    .xu-card .body {
+        padding: 9px;
+        color: #333;
+        font-size: 14px;
+        padding: 10px;
+        margin: 0;
+        display: block;
+    }
+    .xu-card h3 {
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #ec7263;
+        margin: 0 0 8px 0;
+    }
+    .xu-card .caption {
+        height: 21px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 10px;
+    }
+    .xu-card .item {
+        height: 21px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 300;
+        font-size: 90%;
+        margin-bottom: 6px;
+    }
+</style>
 
-		<div class='xg-btns-box'>
-            <vc:xg-create/>
+<div>活動查詢</div>
+<form id='formRead' class='xg-form' style='margin:15px 0;'>
+    <div class='row'>
+        <div class='col-md-3'>
+            <input type="text" id="ActName" value="@ViewBag.ActName" class="form-control" placeholder="輸入活動名稱查詢">
         </div>
-        <div class='row'>
-            <div class='col-sm-12'>
-                <table id="tableRead" class="table table-bordered xg-table" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <vc:xg-th dto="@(new(){ Title = "活動名稱", MinWidth = 80 })"/>
-                            <vc:xg-th dto="@(new(){ Title = "狀態", MinWidth = 50 })"/>
-                            <vc:xg-th dto="@(new(){ Title = "建立人員", MinWidth = 60 })"/>
-                            <vc:xg-th dto="@(new(){ Title = "建立日期", MinWidth = 80, HideRwd = true })"/>
-                            <vc:xg-th dto="@(new(){ Title = "維護", MinWidth = 40 })"/>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+        <div class='col-md-2'>
+            <button type="button" onclick="_me.onFind()" class="btn btn-primary"><i class='ico-find'></i>查詢</button>
+        </div>
+    </div>
+</form>
+
+<div class='row'>
+    @foreach(var row in Model.Rows){
+        var actUrl = "";
+        var imageUrl = $"/Act/Image?key={row.Id}&ext={_File.GetFileExt(row.FileName)}";
+        var startEnd = _Date.GetDtStr2(row.StartTime) + " ~ " + _Date.GetDtStr2(row.EndTime);
+
+        <div class="col-md-4 col-sm-6">
+            <div class="xu-card">
+                <a href="@actUrl">
+                    <div class="image" style="background:url(@imageUrl);background-size:cover;background-position:center;"></div>
+                </a>
+                <div class="body">
+                    <a href="@actUrl" style="text-decoration:none;">
+                        <h3>@row.Name</h3>
+                    </a>
+                    <p class="caption">@row.Caption</p>
+                    <p class="item">主辦單位：@row.CreatorName</p>
+                    <p class="item">活動時間：@startEnd</p>
+                </div>
             </div>
         </div>
-    </div>
+    }
+</div>
 
-    @*
-    <div id="divEdit" class="xg-hide">
-        <partial name="Edit" />
-    </div>
-    *@
-</div>
-<div style="height:400px">
-    test
-</div>
+<div id="divPage" style="margin-bottom:20px"></div>

@@ -20,12 +20,14 @@
 
 <header>
     <nav class="xg-top navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+        <!-- title & left menu -->
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">幫助地球</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a id="linkHide" data-pjax style="display:none"></a>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
@@ -66,9 +68,9 @@
                                 活動發起人功能
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="boxIssueLink">
-                                    <li><a class="dropdown-item" href="#">我的活動</a></li>
-                                    <li><a class="dropdown-item" href="#">勳章使用記錄</a></li>
-                                    <li><a class="dropdown-item" href="#">抽獎</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="/MyRaiseAct/Read">我擧辦的活動</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="#">勳章使用記錄</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="#">開始抽獎</a></li>
                                 </ul>
                             </li>
                             </ul>
@@ -93,6 +95,7 @@
             </div>
         </div>
 
+        <!-- right buttons -->
         <div class="navbar-collapse collapse">
             <ul class="navbar-nav ml-auto">
                 @*

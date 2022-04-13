@@ -744,10 +744,10 @@ input[type=number] {
 /* main form */
 
 .xg-top {
-    color: #EAFFFF;
-    background: #28C2FE;
+    /*color: #EAFFFF;*/
+    background: #F7F6F5;
     /*height: 45px;*/
-    border-bottom: 1px solid #CCC;
+    border-bottom: none !important;
 }
 
     .xg-top li {
@@ -1300,6 +1300,11 @@ table.dataTable thead .sorting_desc_disabled:after {
 	font-weight: lighter !important;
 }
 
+@media (max-width:768px) {
+    .dataTables_length, .dataTables_info {
+        display: none;
+    }
+}
 
 /* use bootstrap datepicker */
 .datepicker {

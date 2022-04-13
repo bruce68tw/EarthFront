@@ -17,7 +17,7 @@ namespace EarthFront.Services
         //constant
         //public const string MyVer = "20201228f";     //for my.js/css
         public static string MyVer = _Date.NowSecStr(); //for my.js/css
-        public const string LibVer = "2022032c";       //for lib.js/css
+        public const string LibVer = "2022032m";       //for lib.js/css
         public const string JwtToken = "_JwtToken";     //cookie name for jwt token
 
         public static string NoImagePath = _Fun.DirRoot + "/wwwroot/image/noImage.jpg";
@@ -29,6 +29,8 @@ namespace EarthFront.Services
         //dir
         public static string DirTpl = _Fun.DirRoot + "_template/";
         public static string DirUpload = _Fun.DirRoot + "_upload/";
+        public static string DirAct = DirUpload + "Act/";
+
         public static string DirLeave = DirUpload + "Leave/";
         public static string DirUserExt = DirUpload + "UserExt/";
         public static string DirUserLicense = DirUpload + "UserLicense/";
@@ -74,9 +76,9 @@ namespace EarthFront.Services
         }
 
         #region get file content
-        public static async Task<FileResult> ViewLeaveAsync(string fid, string key, string ext)
+        public static async Task<FileResult> ViewActAsync(string key, string ext)
         {
-            return await ViewFileAsync(DirLeave, fid, key, ext);
+            return await ViewFileAsync(DirAct, "FileName", key, ext);
         }
 
         public static async Task<FileResult> ViewUserExtAsync(string fid, string key, string ext)

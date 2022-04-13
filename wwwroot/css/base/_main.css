@@ -1,10 +1,10 @@
 ﻿/* main form */
 
 .xg-top {
-    color: #EAFFFF;
-    background: #28C2FE;
+    /*color: #EAFFFF;*/
+    background: #F7F6F5;
     /*height: 45px;*/
-    border-bottom: 1px solid #CCC;
+    border-bottom: none !important;
 }
 
     .xg-top li {

@@ -1,30 +1,24 @@
 ﻿var _me = {
 
-    init: function () {        
-        //datatable config
-        var config = {
-            columns: [
-                { data: 'Name' },
-                { data: 'Status' },
-                { data: 'CreatorName' },
-                { data: 'Created' },
-                { data: '_Fun' },
-            ],
-            columnDefs: [
-				{ targets: [1], render: function (data, type, full, meta) {
-                    return _crud.dtStatusName(data);
-                }},
-				{ targets: [3], render: function (data, type, full, meta) {
-                    return _date.mmToUiDt(data);
-                }, className: 'xg-center '+_fun.HideRwd },
-				{ targets: [4], render: function (data, type, full, meta) {
-                    return _crud.dtCrudFun(full.Id, full.Name, true, true, false);
-                }},
-            ],
-        };
-
-        //initial
-		_crud.init(config);
+    init: function () {
+        _page.init($('#divPage'), _me.pageArg, _me.onPage);
     },
+
+    //on click 頁次
+    onFind: function () {
+        _me.findData();
+    },
+
+    //on click 頁次
+    onPage: function (page, event) {
+        event.preventDefault();
+        _me.findData(page);
+    },
+
+    //page: re-count rows if null
+    findData: function (page) {
+        var json = { act: $('#ActName').val() };
+        _page.onPage(page, _me.pageArg, '/Act/Read', json);
+	},
 
 }; //class

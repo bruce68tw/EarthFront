@@ -37,6 +37,7 @@
 </script>
 
 <form class='col-md-3 xg-form xg-border'>
+    @*<vc:xi-hide dto="@(new(){ Fid = "FromUrl", Value = Model.FromUrl })"/>*@
     <vc:xi-text dto="@(new(){ Title = "帳號", Fid = "Account", MaxLen = 30, Required = true, Cols = "12" })"/>
     <vc:xi-text dto="@(new(){ Title = "密碼", Fid = "Pwd", MaxLen = 30, Required = true, Cols = "12" })"/>
     <vc:xi-check dto="@(new(){ Fid = "Remember", Label = "Remember me" })"/>
@@ -50,10 +51,10 @@
     <div class="xu-line">
         <span>or login by</span>
     </div>
-    <a class="btn btn-default" href="OpenGoogle">
+    <a class="btn btn-default" href="/Home/OpenGoogle?url=@Model.FromUrl">
         <img src="/image/google.jpg" width="20" />Google
     </a>
-    <a class="btn btn-default" href="OpenFb">
+    <a class="btn btn-default" href="/Home/OpenFb?url=@Model.FromUrl">
         <img src="/image/facebook.jpg" width="20" />Facebook
     </a>
 </form>

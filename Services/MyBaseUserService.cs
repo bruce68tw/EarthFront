@@ -22,7 +22,7 @@ namespace EarthFront.Services
                 {
                     UserId = "",
                     UserName = "(Empty)",
-                    IsLogin = false,
+                    //IsLogin = false,
                     HasPwd = false,
                     Locale = _Fun.Config.Locale,
                 };
