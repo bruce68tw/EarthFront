@@ -15,9 +15,12 @@ var _obj = {
      */
     getF: function (ft, box) {
         var obj = box.find(ft);
-        if (obj == null)
-            _log.info('_obj.js getF() found none. (filter=' + ft + ')');
-        return obj;
+        if (obj.length == 0) {
+            //_log.info('_obj.js getF() found none. (filter=' + ft + ')');
+            return null;
+        } else {
+            return obj;
+        }
     },
 
     /**
@@ -28,11 +31,11 @@ var _obj = {
     },
 
     /**
-     * get object by id
-     */
-    getD: function (id, box) {
-        return _obj.getF('#' + id, box);
+     * get object by data-id
+    getD: function (val, box) {
+        return _obj.getF('[data-id=' + val + ']', box);
     },
+     */
 
     /**
      * get object by value

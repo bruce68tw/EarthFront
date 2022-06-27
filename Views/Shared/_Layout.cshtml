@@ -8,6 +8,17 @@
     //var userType = _Fun.GetBaseUser().UserType;
 }
 
+<style>
+    .xu-body{
+        display: inline-block;
+        width: 100%;
+        /*height: 100vh;*/
+        min-height: 600px;
+        /*vertical-align: top;*/
+        transition: 0.5s;
+    }
+</style>
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -45,31 +56,23 @@
             _fun.isRwd = true;
             //initial
             //_leftmenu.init();
-            _pjax.init('.xg-body');
+            _pjax.init('.xu-body');
             _tool.init();
             moment.locale(_fun.locale);
         });
     </script>
 </head>
 
-<!-- 6.show view -->
 <body>
-    <!-- Top -->
     <partial name="_Top.cshtml" />
 
     <div class="container">
-        <main role="main" class="pb-3 xg-body">
+        <main role="main" class="xu-body">
             @RenderBody()
         </main>
     </div>
 
-    <!--
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - EarthFront - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    -->
+    <partial name="_Footer.cshtml" />
 
     <!-- tool component -->
     <vc:xg-tool/>

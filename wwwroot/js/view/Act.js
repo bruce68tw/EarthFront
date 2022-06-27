@@ -1,24 +1,20 @@
 ﻿var _me = {
 
-    init: function () {
-        _page.init($('#divPage'), _me.pageArg, _me.onPage);
+    init: function (pageStr) {
+        _me.page = new Page({
+            pageStr: pageStr,
+            pager: $('#divPage'),
+            linker: $('#hideLink'),
+            //showMenu: true,
+            //pageRowList: [9, 18, 36],
+            action: '/Act/Read',
+            onFind: _me.onFind,
+        });
     },
 
-    //on click 頁次
-    onFind: function () {
-        _me.findData();
+    onFind: function (page) {
+        var json = { name: $('#Name').val() };
+        _me.page.find(json, page);
     },
-
-    //on click 頁次
-    onPage: function (page, event) {
-        event.preventDefault();
-        _me.findData(page);
-    },
-
-    //page: re-count rows if null
-    findData: function (page) {
-        var json = { act: $('#ActName').val() };
-        _page.onPage(page, _me.pageArg, '/Act/Read', json);
-	},
 
 }; //class

@@ -1,10 +1,4 @@
 ﻿@model LoginVo
-@{
-    //Layout = null;
-    var accountMsgClass = (Model.AccountMsg == "") ? "hide" : "";
-    var pwdMsgClass = (Model.PwdMsg == "") ? "hide" : "";
-}
-
 <style>
     .xu-line {
         width: 100%;
@@ -25,25 +19,24 @@
 </style>
 
 <script>
-    //window.onload be ok only !! 
-    /*
-    window.onload = function() {
-        var msg = '@Model.ErrorMsg';
-        if (msg !== '')
-            alert(msg);
-        document.getElementById('Account').focus();
-    };
-    */
+    $(function () {
+        var form = $('form');
+        _valid.init(form);
+        _obj.get('Account', form).focus();
+
+        var error = '@Model.ErrorMsg';
+        if (error !== '')
+            _tool.msg(error);
+    });
 </script>
 
-<form class='col-md-3 xg-form xg-border'>
-    @*<vc:xi-hide dto="@(new(){ Fid = "FromUrl", Value = Model.FromUrl })"/>*@
-    <vc:xi-text dto="@(new(){ Title = "帳號", Fid = "Account", MaxLen = 30, Required = true, Cols = "12" })"/>
-    <vc:xi-text dto="@(new(){ Title = "密碼", Fid = "Pwd", MaxLen = 30, Required = true, Cols = "12" })"/>
+<form action='/Home/Login2' method='post' class='col-md-3 xg-form xg-border'>
+    <vc:xi-text dto="@(new(){ Title = "帳號", Fid = "Account", Value=@Model.Account, MaxLen = 30, Required = true, Cols = "12" })"/>
+    <vc:xi-text dto="@(new(){ Title = "密碼", Fid = "Pwd", Value=@Model.Pwd, MaxLen = 30, Required = true, IsPwd = true, Cols = "12" })"/>
     <vc:xi-check dto="@(new(){ Fid = "Remember", Label = "Remember me" })"/>
 
     <div style="margin-top:20px">
-        <button type="button" class="btn btn-primary">登入</button>
+        <button type="submit" class="btn btn-primary">登入</button>
         <button type="button" class="btn btn-secondary">建立帳號</button>
         <button type="button" class="btn btn-secondary">忘記密碼</button>
     </div>

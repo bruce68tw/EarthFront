@@ -76,22 +76,24 @@ services
         opts.ClientId = _Fun.Config.GoogleClientId;
         opts.ClientSecret = _Fun.Config.GoogleClientSecret;
     });
-    /*
-    .AddFacebook(opts =>
-    {
-        opts.ClientId = _Fun.Config.FbClientId;
-        opts.ClientSecret = _Fun.Config.FbClientSecret;
-    });
-    */
+/*
+.AddFacebook(opts =>
+{
+    opts.ClientId = _Fun.Config.FbClientId;
+    opts.ClientSecret = _Fun.Config.FbClientSecret;
+});
+*/
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+/*
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+*/
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -127,6 +129,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+//app.MapRazorPages();
 
 app.Run();

@@ -3,18 +3,24 @@
  * notice:
  *   1.set data-fkeyFid when save
  *   
- * param kid {string} (required) pkey field id(single key)
+ * param kid {string} pkey field id(single key)
  * param eformId {string} (optional) edit form id
- *   if not empty, system will load UI & prepare save rows
- *     and rows container tag is fixed to 'tbody'
- *   if empty, you could write below custom functions:
- *     1.void fnLoadJson(json): necessary, show form
- *     2.json fnGetUpdJson(upKey): necessary
+ *   if empty, you must write below functions:
+ *     1.void fnLoadJson(json): show josn to form
+ *     2.json fnGetUpdJson(upKey): get updated json by form
  *     3.bool fnValid(): (optional) validate check
- * param tplRowId {string} (optional) row template id for load row & render row.
+ *   if not empty, system will load UI & prepare save rows,
+ *     and rows container tag is fixed to 'tbody'
+ * param tplRowId {string} (optional) row template id
+ *   1.if empty, it will log error when call related function.
+ *   2.system get fid type from this variables
+ *   3.called by singleFormLoadRow、loadRows、_renderRow
  * param rowFilter {string} (optional) filter for find row object
- *   1.inside element -> row(onDeleteRow), 2.rowsBox -> row(getUpdRows)
+ *   1.if empty, it will log error when call related function.
+ *   2.inside element -> row(onDeleteRow),
+ *   3.rowsBox -> row(getUpdRows)
  * param sortFid {string} (optional) sort fid for sorting function
+ * 
  * return {EditMany}
  */
 function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
@@ -29,14 +35,21 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
         this.DataFkeyFid = '_fkeyfid';  //data field for fkey fid
 
         this.kid = kid;
-        this.hasTplRow = !_str.isEmpty(tplRowId);
         this.hasRowFilter = !_str.isEmpty(rowFilter);
         this.rowFilter = rowFilter;
         this.sortFid = sortFid;
 
+        this.systemError = '';
+        this.hasTplRow = !_str.isEmpty(tplRowId);
         if (this.hasTplRow) {
             this.tplRow = $('#' + tplRowId).html();
             var rowObj = $(this.tplRow);
+            //check input & alert error if wrong
+            if (_obj.get(kid, rowObj) == null) {
+                this.systemError = 'EditMany.js input kid is wrong (' + kid + ')';
+                alert(this.systemError);
+            }
+
             _edit.setFidTypeVars(this, rowObj);
             _edit.setFileVars(this, rowObj);
         }
@@ -89,8 +102,8 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
      */
     this.loadJson = function (json) {
         if (this.hasEform) {
-            var rows = (json == null || json[_crud.Rows] == null)
-                ? null : json[_crud.Rows];
+            var rows = (json == null || json[_crudE.Rows] == null)
+                ? null : json[_crudE.Rows];
             this.loadRows(this.rowsBox, rows);
         } else {
             //raise error if no function
@@ -99,7 +112,7 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
     };
 
     /**
-     * load json rows into UI by UserRole Mode(urm)
+     * (urm: UserRole Mode), load json rows into UI by urm
      * param json {json} 
      */
     this.urmLoadJson = function (json, rowsBox, fids) {
@@ -109,7 +122,7 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
         objs.data('key', '');
 
         //check
-        var rows = _crud.getJsonRows(json);
+        var rows = _crudE.getJsonRows(json);
         if (rows == null)
             return;
 
@@ -157,18 +170,19 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
         });
 
         if (rows.length > 0)
-            json[_crud.Rows] = rows;
-        json[_crud.Deletes] = this.getDeletedStr();
+            json[_crudE.Rows] = rows;
+        json[_crudE.Deletes] = this.getDeletedStr();
         return json;
     },
 
     /**
-     * load row by row box(container), also set old value
+     * single form load one row, also set field old value,
+     * ex: DbAdm/MyCrud.js Etable is a single form but has multiple rows property !!
      * param rowBox {object}
      * param row {json}
      * param index {int}
      */
-    this.loadRow = function (rowBox, row, index) {
+    this.singleFormLoadRow = function (rowBox, row, index) {
         if (!this.checkTplRow())
             return;
 
@@ -307,8 +321,8 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
     this.getUpdJson = function (upKey, rowsBox) {
         rowsBox = this.getRowsBox(rowsBox);
         var json = {};
-        json[_crud.Rows] = this.getUpdRows(upKey, rowsBox);
-        json[_crud.Deletes] = this.getDeletedStr();
+        json[_crudE.Rows] = this.getUpdRows(upKey, rowsBox);
+        json[_crudE.Deletes] = this.getDeletedStr();
         return json;
     };
 
@@ -403,14 +417,15 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
     };
 
     /**
-     * add one row into UI
-     * param {object} row(optional)
+     * add one row(or empty) into UI
+     * param {object} (optional) rowsBox
+     * param {object} (optional) row
      * return {object} row jquery object(with UI)
      */
     this.addRow = function (rowsBox, row) {
         row = row || {};
         rowsBox = this.getRowsBox(rowsBox);
-        var obj = this.renderRow(rowsBox, row);
+        var obj = this._renderRow(rowsBox, row);
         this.boxSetNewId(obj);
         return obj;
     };
@@ -467,9 +482,9 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
      * param row {json}
      * return {object} row object
      */ 
-    this.renderRow = function (rowsBox, row) {
+    this._renderRow = function (rowsBox, row) {
         if (!this.checkTplRow())
-            return;
+            return null;
 
         rowsBox = this.getRowsBox(rowsBox);
         var obj = $(Mustache.render(this.tplRow, row));
@@ -482,6 +497,7 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
      * (need this.rowFilter !!) formData add upload files
      * param levelStr {string}
      * param data {FormData}
+     * param rowsBox {object} (optional) use EditMany setting if empty
      * return {json} file json
      */ 
     this.dataAddFiles = function (levelStr, data, rowsBox) {
@@ -612,7 +628,6 @@ function EditMany(kid, eformId, tplRowId, rowFilter, sortFid) {
         return tbody.find('tr').eq(rowNo).find('[data-id=' + dataId + ']');
     };
 
-    //?? -> _crud.js
     //keys is two dimension
     this.keysToStr = function (keys) {
         var strs = [];

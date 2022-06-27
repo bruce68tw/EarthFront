@@ -1,0 +1,76 @@
+﻿<script src="~/js/lib/ethers.umd.min.js"></script>
+<script>
+    //save jwt token
+    //window.onload = function() {
+    //    _fun.setJwtToken('@ViewBag.Token');
+    //};
+    var _me = {
+        nodeUrl: 'http://localhost:8545',
+        //nodeUrl = 'https://mainnet.infura.io/yourAddress';
+        //nodeUrl = 'rinkeby' // use rinkeby testnet
+
+        //test1 account
+        myAccount: "0xDCd259a9f4B85C5622b788D5945077db162DAbF0",
+
+        minABI: [
+            // transfer
+            {
+            'constant': false,
+            'inputs': [
+                {
+                'name': '_to',
+                'type': 'address'
+                },
+                {
+                'name': '_value',
+                'type': 'uint256'
+                }
+            ],
+            'name': 'transfer',
+            'outputs': [
+                {
+                'name': '',
+                'type': 'bool'
+                }
+            ],
+            'type': 'function'
+            }
+        ],
+
+        onDonate: function(){
+
+            //查詢帳戶餘額
+            _ether.init(_me.nodeUrl);
+            _ether.getBalance(_me.myAccount, (ethValue)=> {
+                console.log(`balance: ${ethValue} ETH`);
+            });
+
+            //轉帳
+
+            //var contract = new _me.web3.eth.Contract(_me.minABI, tokenAddress);
+            /*
+            //合約
+            var myContract = new _me.web3.eth.Contract(_me.contractAbi, contractAddress, {
+                from: currentAccount, // default from address
+                gasPrice: '10000000000' // default gas price in wei, 10 gwei in this case
+            });
+
+            //查看某個賬號的餘額
+            myContract.methods.balanceOf(_me.contractAddress).call({from: _me.myAccount}, function(error, result){
+            if (!error) {
+                console.log(result);
+            } else {
+                console.log(error);
+            }
+            */
+        },
+    };
+
+
+</script>
+
+<div class="text-center">
+    <h1 class="display-4">我要捐款</h1>
+    <p>請輸入要捐贈的以太幣數量：</p>
+    <button type="button" onclick="_me.onDonate()" class="btn btn-secondary">捐贈</button>
+</div>

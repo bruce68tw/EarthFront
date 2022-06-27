@@ -23,21 +23,15 @@ namespace EarthFront.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginVo vo)
+        public ActionResult Login2(LoginVo vo)
         {
-            #region 1.check input account & password
-            //reset UI msg
-            vo.AccountMsg = "";
-            vo.PwdMsg = "";
-            #endregion
-
-            #region 2.check DB password & get user info
-            var token = await new HomeService().LoginAsync(vo.Account, vo.Pwd, vo);
+            //check DB password & get user info
+            vo.ErrorMsg = "";
+            var token = new HomeService().Login(vo);
             if (_Str.IsEmpty(token))
                 goto lab_exit;
-            #endregion
 
-            //3.redirect
+            //redirect
             return LoginAndRedirect(token);
 
         lab_exit:

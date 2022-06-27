@@ -1,29 +1,45 @@
 ﻿/**
- * single edit form, called by _crud.js
+ * single edit form, called by _crudE.js
  * json row for both EditOne/EditMany has fields:
  *   _rows {json array}: updated rows include upload files
  *   _deletes {strings}: deleted key strings, seperate with ','
  *   _childs {json array}: child json array
  * 
- * custom function called by _crud.js
+ * custom function called by _crudE.js
  *   //void fnAfterLoadJson(json)
  *   void fnAfterOpenEdit(fun, json): called after open edit form
- *   void fnAfterSwap(readMode): called after _crud.swap()
+ *   void fnAfterSwap(readMode): called after _crudR.swap()
  *   error fnWhenSave()
  *   void fnAfterSave()
  *   
- * param kid {string} (optional 'Id') key field id
- * param eformId {string} (optional 'eform')
+ * param kid {string} (default 'Id') pkey field id for getKey value & getUpdRow,
+ *   must existed or will set systemError variables !!
+ * param eformId {string} (default 'eform') must existed or will set systemError variables !!
+ * note!! if these two parameters not Id/eform, must new EditOne() and set them !!
+ * 
  * return {EditOne}
  */ 
 function EditOne(kid, eformId) {
 
     /**
-     * initial & and instance variables (this.validator by _valid.init())
+     * initial & and instance variables (this.validator is by _valid.init())
+     * called by this(at last)
      */
     this.init = function () {
         this.kid = kid || 'Id';
-        this.eform = $('#' + (eformId || 'eform'));     //multiple rows container object
+        eformId = eformId || 'eform';
+        this.eform = $('#' + eformId);     //multiple rows container object
+
+        //check input & alert error if wrong
+        this.systemError = '';
+        var error = (this.eform.length != 1) ? 'EditOne.js input eformId is wrong. (' + eformId + ')' :
+            (_obj.get(this.kid, this.eform) == null) ? 'EditOne.js input kid is wrong. (' + this.kid + ')' :
+            '';
+        if (error != '') {
+            this.systemError = error;
+            alert(error);
+            //return;   //not return
+        }
 
         _edit.setFidTypeVars(this, this.eform);
         _edit.setFileVars(this, this.eform);

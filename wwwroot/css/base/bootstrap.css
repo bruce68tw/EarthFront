@@ -13,6 +13,7 @@
 /* table button with link style */
 .btn-link {
     padding: 0 !important;
+    text-decoration: none !important;
 }
 
 .table-condensed {
@@ -26,7 +27,7 @@
     /*padding: 3px 6px !important;*/
 }
 
-    .form-control:disabled, .form-control[readonly] {
+    .form-control:disabled, .form-control[readonly], .form-select:disabled, .form-select[readonly] {
         background-color: #eee !important;
     }
 
@@ -54,4 +55,14 @@ textarea.form-control {
 }
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: lightgrey !important;
+}
+
+/* fix bootstrap 5 */
+.table > :not(:first-child) {
+    border-top: none !important;
+}
+
+.input-group > .form-control,
+.input-group > .form-select {
+    width: 100% !important;    
 }

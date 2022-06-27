@@ -1,33 +1,28 @@
-﻿
-<style>
-    /*
-    .xu-top {
-        color: #EAFFFF;
-        height: 45px;
-        border-bottom: 1px solid #CCC;
-    }
-
+﻿<style>
+	.xu-top {
+		/*color: #EAFFFF;*/
+		background: #F7F6F5;
+		/*height: 45px;*/
+		border-bottom: none !important;
+	}
     .xu-top li {
         margin: auto 5px;
-        color: blue;
     }
-
     .xu-top i {
         font-size: 20px;
     }
-    */
 </style>
 
 <header>
-    <nav class="xg-top navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+    <nav class="xu-top navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
         <!-- title & left menu -->
+        <vc:xg-hide-link/>
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">幫助地球</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a id="linkHide" data-pjax style="display:none"></a>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
@@ -49,12 +44,13 @@
                             <ul class="navbar-nav">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="boxAttendLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                參加者功能
+                                    參加者功能
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="boxAttendLink">
-                                    <li><a class="dropdown-item" href="#">活動報到</a></li>
-                                    <li><a class="dropdown-item" href="#">參加抽獎</a></li>
-                                    <li><a class="dropdown-item" href="#">兌換以太幣</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="/RaiseAct/Read">我參加的活動</a></li>
+                                    <li><a class="dropdown-item" href="#">(子功能)活動報到</a></li>
+                                    <li><a class="dropdown-item" href="#">(子功能)參加抽獎(區)</a></li>
+                                    <li><a class="dropdown-item" href="#">兌換以太幣(區)</a></li>
                                 </ul>
                             </li>
                             </ul>
@@ -65,12 +61,12 @@
                             <ul class="navbar-nav">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="boxIssueLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                活動發起人功能
+                                    活動發起人功能
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="boxIssueLink">
-                                    <li><a class="dropdown-item" data-pjax href="/MyRaiseAct/Read">我擧辦的活動</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="/RaiseAct/Read">我舉辦的活動</a></li>
                                     <li><a class="dropdown-item" data-pjax href="#">勳章使用記錄</a></li>
-                                    <li><a class="dropdown-item" data-pjax href="#">開始抽獎</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="#">開始抽獎(區)</a></li>
                                 </ul>
                             </li>
                             </ul>
@@ -81,11 +77,12 @@
                             <ul class="navbar-nav">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="boxAssistLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                贊助者功能
+                                    贊助者功能
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="boxAssistLink">
-                                    <li><a class="dropdown-item" href="#">我要捐款</a></li>
-                                    <li><a class="dropdown-item" href="#">贊助活動查詢</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="/Donate/Create">我要捐款(區)</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="/Donate/Read">我的捐款記錄</a></li>
+                                    <li><a class="dropdown-item" data-pjax href="/Donate/Acts">我贊助的活動</a></li>
                                 </ul>
                             </li>
                             </ul>

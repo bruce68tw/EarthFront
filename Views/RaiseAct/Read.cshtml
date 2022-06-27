@@ -1,0 +1,63 @@
+﻿@model PageOut<ActRowDto>
+<script src="~/js/view/RaiseAct.js"></script>
+<script type="text/javascript">
+    $(function () {
+        _me.init('@Model.PageArg');
+    });
+</script>
+
+<vc:xg-prog-path names="@(new string[] { "我舉辦的活動" })"/>
+<div id="divRead">
+    <form id='formRead' class='xg-form' style='margin:15px 0 5px 0;'>
+        <div class='row'>
+            <div class='col-md-3'>
+                <input type="text" id="Name" value="@ViewBag.Name" class="form-control" placeholder="輸入活動名稱查詢">
+            </div>
+            <div class='col-md-2'>
+                <button type="button" onclick="_me.onFind()" class="btn btn-primary"><i class='ico-find'></i>查詢</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table xg-table" cellspacing="0" role="grid">
+        <thead>
+            <tr role="row">
+                <th>活動名稱</th>
+                <th>主辦單位</th>
+                <th>活動時間</th>
+                <th width="80px">維護</th>
+                <th width="85px">資料狀態</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var row in Model.Rows){
+                var startEnd = _Date.GetDtStr2(row.StartTime) + " ~ " + _Date.GetDtStr2(row.EndTime);
+
+            <tr role="row">
+                <td data-rwd-th="活動名稱：">@row.Name</td>
+                <td data-rwd-th="主辦單位：">@row.CreatorName</td>
+                <td data-rwd-th="活動時間：">@startEnd</td>
+                <td data-rwd-th="維護：">
+                    @await Component.InvokeAsync("XgCrudFun", new { key = row.Id, 
+                        hasUpdate = true, hasDelete = true, hasView = true })
+                    @*
+                    <button type="button" class="btn btn-link" onclick="_crudR.onUpdate('@row.Id')">
+                        <i class="ico-pen" title="修改這筆資料"></i>
+                    </button>
+                    <button type="button" class="btn btn-link" onclick="_crudR.onDelete('@row.Id')">
+                        <i class="ico-delete" title="刪除這筆資料"></i>
+                    </button>
+                    *@
+                </td>
+                <td data-rwd-th="資料狀態：">正常</td>
+            </tr>
+            }
+    </table>
+
+    <div id="divPage" style="margin:15px 0 25px 0"></div>
+</div>
+
+@* 8.edit form *@
+<div id="divEdit" class="xg-hide">
+    <partial name="Edit" />
+</div>

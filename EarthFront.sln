@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseWeb", "..\Base\BaseWeb\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EarthFront", "EarthFront.csproj", "{5E593B5D-5F02-4660-BCD7-4BA0A2CF746A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "..\UnitTest\UnitTest.csproj", "{840E489D-C1E0-493B-80AF-6A771D3D89EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{5E593B5D-5F02-4660-BCD7-4BA0A2CF746A}.Debug-Local|Any CPU.Build.0 = Debug|Any CPU
 		{5E593B5D-5F02-4660-BCD7-4BA0A2CF746A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E593B5D-5F02-4660-BCD7-4BA0A2CF746A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Debug-IP|Any CPU.ActiveCfg = Debug|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Debug-IP|Any CPU.Build.0 = Debug|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Debug-Local|Any CPU.ActiveCfg = Debug|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Debug-Local|Any CPU.Build.0 = Debug|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{840E489D-C1E0-493B-80AF-6A771D3D89EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

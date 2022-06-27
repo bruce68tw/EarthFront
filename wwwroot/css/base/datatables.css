@@ -1,7 +1,7 @@
 ﻿
 /* 筆數起迄&合計 */
 .dataTables_info {
-    padding-top: 6px !important;
+    padding-top: 4px !important;
 }
 
 .dataTables_wrapper {
@@ -76,10 +76,4 @@ table.dataTable thead .sorting_desc_disabled:after {
     content: '\e901' !important;
     font-family: 'icomoon' !important;
 	font-weight: lighter !important;
-}
-
-@media (max-width:768px) {
-    .dataTables_length, .dataTables_info {
-        display: none;
-    }
 }

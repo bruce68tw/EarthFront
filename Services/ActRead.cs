@@ -13,7 +13,7 @@ namespace EarthFront.Services
 select a.*, u.Name as CreatorName 
 from dbo.Act a
 join dbo.UserFront u on a.Creator=u.Id
-order by a.Id
+order by a.Sn
 ",
             TableAs = "a",
             Items = new QitemDto[] {
@@ -23,7 +23,8 @@ order by a.Id
 
         public async Task<PageOut<ActRowDto>> GetPageAsync(int pageNo, int pageRows, int filterRows, string act)
         {
-            return await new CrudRead().GetEasyPageAsync<ActRowDto>(readDto, 
+            pageRows = _Page.GetPageRows(pageRows, new() { 9, 18, 36 });
+            return await new CrudRead().GetPage2Async<ActRowDto>(readDto, 
                 _Page.GetPageIn(pageNo, pageRows, filterRows, new List<object>() { "Name", act }));
         }
 

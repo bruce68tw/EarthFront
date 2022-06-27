@@ -1,0 +1,18 @@
+﻿<form id='eform' class='xg-form'>
+    <vc:xi-hide dto="@(new(){ Fid = "Id" })"/>
+    <vc:xi-text dto="@(new(){ Title = "活動名稱", Fid = "Name", MaxLen = 100, Required = true })"/>
+    <vc:xi-select dto="@(new(){ Title = "捐贈來源", Fid = "DonateId", Rows = ViewBag.Donates })"/>
+    <vc:xi-text dto="@(new(){ Title = "主題文字", Fid = "Caption", MaxLen = 100, Required = true, Cols = "2,5" })"/>
+    <vc:xi-dt dto="@(new(){ Title = "活動開始時間", Fid = "StartTime", Required = true })"/>
+    <vc:xi-dt dto="@(new(){ Title = "活動結束時間", Fid = "EndTime", Required = true })"/>
+    <vc:xi-int dto="@(new(){ Title = "預計參加人數", Fid = "PlanUsers", Required = true, Cols = "2,1" })"/>
+    <vc:xi-int dto="@(new(){ Title = "預計使用幣數", Fid = "PlanCoin", Required = true, Cols = "2,1" })"/>
+    <vc:xi-read dto="@(new(){ Title = "實際使用幣數", Fid = "RealCoin" })"/>
+    <vc:xi-file dto="@(new(){ Title = "活動圖檔", Fid = "FileName", Required = true })"/>
+    <vc:xi-textarea dto="@(new(){ Title = "活動說明", Fid = "Note", Required = true, Cols = "2,5" })"/>
+    <vc:xi-check dto="@(new(){ Title = "資料狀態", Fid = "Status", Label = "啟用" })"/>
+    <vc:xi-read dto="@(new(){ Title = "建檔人員", Fid = "CreatorName" })"/>
+    <vc:xi-read dto="@(new(){ Title = "建檔日期", Fid = "Created", Format = BrFormatEstr.Dt })"/>
+</form>
+
+<vc:xg-save-back/>

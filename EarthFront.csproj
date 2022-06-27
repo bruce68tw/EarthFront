@@ -8,10 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\js\lib\old\**" />
+    <Compile Remove="wwwroot_old\**" />
     <Compile Remove="_log\**" />
+    <Content Remove="wwwroot\js\lib\old\**" />
+    <Content Remove="wwwroot_old\**" />
     <Content Remove="_log\**" />
+    <EmbeddedResource Remove="wwwroot\js\lib\old\**" />
+    <EmbeddedResource Remove="wwwroot_old\**" />
     <EmbeddedResource Remove="_log\**" />
+    <None Remove="wwwroot\js\lib\old\**" />
+    <None Remove="wwwroot_old\**" />
     <None Remove="_log\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Shared\_Layout.cshtml_new2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml_new2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +46,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Base\BaseWeb\BaseWeb.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tables\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://docs.gradle.com/build-cache-node/schema/build-cache-node-config-schema-5.json" /></VisualStudio></ProjectExtensions>

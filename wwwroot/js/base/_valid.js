@@ -17,20 +17,19 @@ var _valid = {
 
         //config
         var config = {
-            ignore: ':hidden:not([data-type=html]),.note-editable.card-block',   //or summernote got error
+            /*
+            */
             //errorClass: 'label label-danger',
+            //onclick: false, //checkbox, radio, and select
+            //ignore: ':hidden:not(.xd-valid[data-type=file]),:hidden:not([data-type=html]),.note-editable.card-block',   //or summernote got error
+            //ignore: ':hidden:not(.xd-valid)',     //html/file has .xd-valid need validate !!
+            ignore: ':hidden:not(.xd-valid), .note-editable.panel-body',
             errorElement: 'span',
             errorPlacement: function (error, elm) {
-                //debugger;
                 error.insertAfter(_valid._getBox($(elm)));
                 return false;
             },
-            //ignore: '',     //xiFile has hidden input need validate
-            //onclick: false, //checkbox, radio, and select
-            /*
-            */
             highlight: function (elm, errorClass, validClass) {
-                //debugger;
                 var me = $(elm);
                 var box = _valid._getBox(me);
                 box.removeClass(validClass).addClass(errorClass);
@@ -40,7 +39,6 @@ var _valid = {
                 return false;
             },
             unhighlight: function (elm, errorClass, validClass) {
-                //debugger;
                 var me = $(elm);
                 var box = _valid._getBox(me);
                 box.removeClass(errorClass).addClass(validClass);
@@ -48,9 +46,8 @@ var _valid = {
                 if (obj != null)
                     obj.hide();
                 return false;
-                //var me = $(elm);
-                //me.data('edit', 1);    //註記此欄位有異動
             },
+            /*
             //copy from jquery validate defaultShowErrors()
             showErrors: function (errorMap, errorList) {
                 //this.defaultShowErrors();
@@ -81,6 +78,7 @@ var _valid = {
                 //this.addWrapper(this.toShow).show();
                 //return false;
             },
+            */
         };
 
         return form.validate(config);
@@ -101,6 +99,7 @@ var _valid = {
             ? error : null;
     },
 
+    /*
     valid: function () {
         var valid, validator, errorList;
 
@@ -120,6 +119,7 @@ var _valid = {
         }
         return valid;
     },
+    */
 
     //#region remark code
     /**

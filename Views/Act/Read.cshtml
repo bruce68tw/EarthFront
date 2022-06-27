@@ -2,8 +2,7 @@
 <script src="~/js/view/Act.js"></script>
 <script type="text/javascript">
     $(function () {
-        _me.pageArg = _page.getPageArg('@Model.PageArg')
-        _me.init();
+        _me.init('@Model.PageArg');
     });
 </script>
 
@@ -67,10 +66,10 @@
 </style>
 
 <div>活動查詢</div>
-<form id='formRead' class='xg-form' style='margin:15px 0;'>
+<form id='formRead' class='xg-form' style='margin:15px 0 5px 0;'>
     <div class='row'>
         <div class='col-md-3'>
-            <input type="text" id="ActName" value="@ViewBag.ActName" class="form-control" placeholder="輸入活動名稱查詢">
+            <input type="text" id="Name" value="@ViewBag.Name" class="form-control" placeholder="輸入活動名稱查詢">
         </div>
         <div class='col-md-2'>
             <button type="button" onclick="_me.onFind()" class="btn btn-primary"><i class='ico-find'></i>查詢</button>
@@ -102,4 +101,4 @@
     }
 </div>
 
-<div id="divPage" style="margin-bottom:20px"></div>
+<div id="divPage" style="margin:15px 0 25px 0"></div>

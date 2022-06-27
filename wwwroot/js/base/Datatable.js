@@ -84,7 +84,7 @@ function Datatable(selector, url, dtConfig, findJson, fnOk, tbarHtml) {
             },
 
             //default toolbar layout
-            dom: _crud.dtDom,
+            dom: _crudR.dtDom,
 
             //call after dataTables initialize
             //1.add toolbar button list if need
@@ -178,13 +178,14 @@ function Datatable(selector, url, dtConfig, findJson, fnOk, tbarHtml) {
         if (dtConfig) {
             if (!_var.isEmpty(dtConfig.columnDefs)) {
                 var colDefs = dtConfig.columnDefs;
-                colDefs[colDefs.length] = _crud.dtColDef;   //add last array element
+                colDefs[colDefs.length] = _crudR.dtColDef;   //add last array element
             }
             config = _json.copy(dtConfig, config);
         }
 
         //add data-rwd-th if need
         var dt = $(selector);
+        /*
         if (_fun.isRwd) {
             //讀取多筆資料 header (set this._rwdTh[])
             var me = this;
@@ -198,6 +199,7 @@ function Datatable(selector, url, dtConfig, findJson, fnOk, tbarHtml) {
                 });
             };
         }
+        */
         
         //before/after ajax call, show/hide waiting msg
         dt.on('preXhr.dt', function (e, settings, data) { _fun.block(); });

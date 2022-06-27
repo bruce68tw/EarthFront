@@ -24,9 +24,6 @@ var _fun = {
     //#endregion
 
     //variables
-    //jwt token, auto added into http headers if not empty.
-    //jwtToken: '',
-
     locale: 'zh-TW',    //now locale, _Layout.cshmlt will set
     maxFileSize: 50971520,  //upload file limit(50M)
     isRwd: false,
@@ -37,13 +34,6 @@ var _fun = {
 
     //variables ??
     //isCheck: true,
-
-    /*
-    setJwtToken: function (token) {
-        if (_str.notEmpty(token))
-            _fun.jwtToken = token;
-    },
-    */
 
     //server need Fun/Hello()
     onHello: function () {

@@ -7,3 +7,4 @@ packages/
 *.rar
 old/
 .config/
+wwwroot_old/
